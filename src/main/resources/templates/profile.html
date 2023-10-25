@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/static/css/profile.css}" />
+    <title>LuxeWear Rental</title>
+  </head>
+
+  <body>
+    <div class="contanier">
+      <nav class="navbar navbar-expand-lg">
+        <div class="logo">
+          <a th:href="@{/}"
+            ><img
+              alt=""
+              th:src="@{/static/images/large_luxeware.png}"
+              width="auto"
+              height="100"
+          /></a>
+        </div>
+
+        <ul>
+          <li>
+            <a th:href="@{/}">home</a>
+          </li>
+          <li>
+            <a th:href="@{/shop}">shop</a>
+          </li>
+          <li>
+            <a
+              th:if="${#authorization.expression('isAuthenticated()')}"
+              th:href="@{/logout}"
+              href="#"
+              >logout</a
+            >
+            <a
+              th:unless="${#authorization.expression('isAuthenticated()')}"
+              th:href="@{/login}"
+              >login</a
+            >
+          </li>
+          <li>
+    	 	<a th:href="@{/cart}" href="#"><i class="fa badge fa-lg" th:value=${cartCount}>&#xf07a;</i></a>
+ 		  </li>
+		  <li>
+		  	<a th:href="@{/profile}" href="#"><i class="fas fa-user fa-lg"></i></a>
+ 		  </li>
+        </ul>
+      </nav>
+
+      <div class="content" >
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-lg-3 my-lg-0 my-md-1">
+              <div id="sidebar">
+    			<div class="h4 text-white">Profile</div>
+    				<ul class="profileUl">
+        				<li>
+            				<a href="#" th:href="@{/orderPlaced}" class="text-decoration-none d-flex align-items-start">
+                				<div class="fas fa-box-open pt-2 me-3"></div>
+                				<div class="d-flex flex-column">
+                    				<div class="link">My Orders</div>
+                    				<div class="link-desc">View & Manage orders and returns</div>
+                				</div>
+            				</a>
+        				</li>
+        				<li>
+            				<a href="#" class="text-decoration-none d-flex align-items-start">
+                				<div class="far fa-user pt-2 me-3"></div>
+                				<div class="d-flex flex-column">
+                    				<div class="link">My Account</div>
+                    				<div class="link-desc">Change your Account details & password</div>
+                				</div>
+            				</a>
+        				</li>
+    				</ul>
+			</div>
+            </div>
+            <div class="col-lg-9 my-lg-0 my-1">
+              <div
+                id="main-content"
+                class="bg-white border"
+                style="margin-top: 50px"
+              >
+                <div class="d-flex flex-column">
+                  <div class="h5"><span th:text="${user.firstName+' '+user.lastName}"></span></div>
+                  <div>Logged in as: <span th:text="${user.email}"></span></div>
+                </div>
+                <div class="d-flex my-4 flex-wrap">
+                  <div class="box me-4 my-1 bg-light">
+                  <a th:href="@{/orderPlaced}">
+                    <img
+                      src="https://www.freepnglogos.com/uploads/box-png/cardboard-box-brown-vector-graphic-pixabay-2.png"
+                      alt=""
+                    />
+                    </a>
+                    <div class="d-flex align-items-center mt-2">
+                      <div>Orders placed : </div>
+                      <div class="ms-auto number">10</div>
+                    </div>
+                  </div>
+                  <div class="box me-4 my-1 bg-light" style="margin-left: 20px">
+                   <a th:href="@{/cart}" href="#">
+                    <img
+                      src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-campus-recreation-university-nebraska-lincoln-30.png"
+                      alt=""
+                    /></a>
+                    	<div class="d-flex align-items-center mt-2">
+                      		<div class="tag">Items in Cart : </div>
+                      		<div class="ms-auto number" th:text="${cartCount}"></div>
+                    </div>
+                    
+                  </div>
+                </div>
+                <div class="text-uppercase">User Detail</div>
+				<div class="order my-3 bg-light">
+    				<div class="row">
+        				<div class="col-lg-4">
+            				<div class="d-flex flex-column justify-content-between order-summary">
+                				<div class="d-flex align-items-center"></div>
+            				</div>
+        				</div>
+        				<div class="col-lg-8">
+            				<div class="d-sm-flex align-items-sm-start justify-content-sm-between">
+                				<div class="fs-8" style="margin-left: -250px">
+                    				<h5>First Name: <span th:text="${user.firstName}"></span></h5>
+                    				<h5>Last Name: <span th:text="${user.lastName}"></span></h5>
+                    				<h5>Email: <span th:text="${user.email}"></span></h5>
+                				</div>
+            				</div>
+        				</div>
+    				</div>
+				</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

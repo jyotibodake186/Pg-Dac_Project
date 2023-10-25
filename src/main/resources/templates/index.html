@@ -1,0 +1,152 @@
+<!doctype html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/static/css/index.css}" />
+    <title>LuxeWear Rental</title>
+  </head>
+
+  <body>
+    <div class="contanier">
+      <nav class="navbar navbar-expand-lg">
+        <div class="logo">
+          <a th:href="@{/}"><img alt="" th:src="@{/static/images/large_luxeware.png}" width="auto" height="100"></a>
+        </div>
+
+        <ul>
+          <li>
+    		<a th:href="@{/}">home</a>
+		  </li>
+		  <li>
+            <a th:href="@{/shop}">shop</a>
+          </li>
+          <li>
+            <a th:if="${#authorization.expression('isAuthenticated()')}" th:href="@{/logout}" href="#">logout</a>
+            <a th:unless="${#authorization.expression('isAuthenticated()')}" th:href="@{/login}">login</a>
+          </li>
+          <li>
+    	 	<a th:href="@{/cart}" href="#"><i class="fa badge fa-lg" th:value=${cartCount}>&#xf07a;</i></a>
+ 		  </li>
+		  <li>
+		  	<a th:href="@{/profile}" href="#"><i class="fas fa-user fa-lg"></i></a>
+ 		  </li>
+        </ul>
+      </nav>
+
+      <div class="content">
+        <div class="div-text">
+          <span>outfit of the day</span>
+          <h3>all your</h3>
+          <h1>styles are here</h1>
+          <p>
+            Discover the epitome of style and luxury at LuxeWear Rentals, your
+            ultimate destination for renting high-end clothing and accessories
+            without breaking the bank. Our mission is to provide you with the
+            finest selection of luxury garments, ensuring you look your best for
+            every occasion, all while keeping costs to a minimum.
+          </p>
+          <a th:href="@{/shop}" class="btn">Shop now</a>
+        </div>
+
+        <div class="div-img">
+          <img id="big-img" th:src="@{/static/images/jacket1.png}" alt="" />
+        </div>
+
+        <div class="small-img">
+    		<img data-image="jacket2.png"
+         	th:onclick="'myTshirt(this)'"
+         	th:src="@{/static/images/jacket2.png}"
+         	alt=""/>
+    		<img data-image="ladiesdress.png"
+         	th:onclick="'myTshirt(this)'"
+         	th:src="@{/static/images/ladiesdress.png}"
+         	alt=""/>
+    		<img data-image="jacket3.png"
+         	th:onclick="'myTshirt(this)'"
+         	th:src="@{/static/images/jacket3.png}"
+         	alt=""/>
+		</div>
+      </div>
+      <div class="my-2">
+      <footer class="py-4">
+        
+          <div class="row">
+            <div class="col-md-4 ml-5">
+              <h5 class="text-light">About Us</h5>
+              <p class="text-light">
+                LuxeWear your destination for cutting-edge fashion
+                without the commitment. Explore our curated selection of
+                trending styles and designer gems for rent. Redefine fashion
+                with seamless browsing and booking.
+              </p>
+            </div>
+            <div class="col-md-3 offset-4">
+              <h4 class="text-light">Contact Us</h4>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <label class="h6 text-light"
+                    >Email:
+                    <a
+                      class="text-light"
+                      style="text-decoration: none"
+                      href="mailto:"
+                      >fashionrental@gmail.com</a
+                    ></label
+                  >
+                </li>
+                <li class="mb-2">
+                  <label class="h6 text-light"
+                    >Contact:
+                    <a
+                      class="text-light"
+                      style="text-decoration: none"
+                      href="tel:"
+                      >1234567890</a
+                    ></label
+                  >
+                </li>
+              </ul>
+               <a class="text-light" href="#"><i class="fab fa-facebook m-2 mb-3"></i></a>
+               <a class="text-light" href="#"><i class="fab fa-instagram m-2 mb-3"></i></a>
+               <a class="text-light" href="#"><i class="fab fa-twitter m-2 mb-3"></i></a>
+            </div>
+          </div>
+        
+        <div class="row justify-content-center " style="background-color: light-grey">
+        <span class="text-light text-center mt-5">© Copyrights Reserved By 2023 LuxeWear.</span>
+      </div>
+      </footer>
+      
+    </div>
+    </div>
+    
+    <script th:src="@{/static/js/custom.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
